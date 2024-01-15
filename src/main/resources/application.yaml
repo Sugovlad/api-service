@@ -16,4 +16,4 @@ server:
   port: ${SERVER_PORT}
 
 application:
-  admin-service-uri: ${ADMIN_SERVICE_URI}
+  admin-service-uri: lb://ADMIN-SERVICE
