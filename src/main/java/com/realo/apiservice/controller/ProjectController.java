@@ -1,15 +1,18 @@
-package com.realo.apiservice.controllers;
+package com.realo.apiservice.controller;
 
-import com.realo.apiservice.models.Project;
-import com.realo.apiservice.services.ProjectService;
+import com.realo.apiservice.model.Project;
+import com.realo.apiservice.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+
+@Validated
 @RestController
-@RequestMapping("/apiservice/project")
+@RequestMapping("/api-service/project")
 public class ProjectController {
     private final ProjectService projectService;
 

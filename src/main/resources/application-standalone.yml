@@ -1,0 +1,15 @@
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+spring:
+  cloud:
+    config:
+      enabled: false
+
+server:
+  port: 8084
+
+application:
+  admin-service-uri: http://localhost:8083
