@@ -46,7 +46,7 @@ dependencyManagement {
 
 bootJar {
     archiveFileName = 'api-service.jar'
-    mainClass = 'com.realo.adminservice.ApiServiceApplication'
+    mainClass = 'com.realo.apiservice.ApiServiceApplication'
 }
 
 tasks.named('test') {
