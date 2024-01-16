@@ -18,8 +18,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Mono<ResponseEntity<String>> handleNotSavedException(MethodArgumentNotValidException ex) {
-        log.error("Wrong data was occurred during validation", ex);
-
         return Mono.just(ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body("Wrong data was occurred during validation" + ex.getMessage()));
@@ -29,11 +27,9 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Throwable.class)
-    public Mono<ResponseEntity<String>> handleNotSavedException(Throwable ex) {
-        log.error("", ex);
-
+    public Mono<ResponseEntity<String>> handleNotSavedException(Throwable throwable) {
         return Mono.just(ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Unknown exception. Please try again later" + ex.getMessage()));
+                .body("Unknown exception. Please try again later" + throwable.getMessage()));
     }
 }

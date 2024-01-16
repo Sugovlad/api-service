@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 
 @Validated
 @RestController
-@RequestMapping("/api-service/user")
+@RequestMapping("/api/user")
 public class UserController {
     private final UserService userService;
 

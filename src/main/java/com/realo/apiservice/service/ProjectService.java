@@ -20,95 +20,52 @@ public class ProjectService {
         return webClient.post()
                 .uri("project")
                 .body(Mono.just(project), Project.class)
-                .exchangeToMono((response) -> {
-                    if (response.statusCode().isError()) {
-                        return response.bodyToMono(String.class)
-                                .flatMap(errorBody -> Mono.error(new RuntimeException("Error: " + errorBody)));
-                    }
-
-                    return response.bodyToMono(Project.class);
-                });
+                .retrieve()
+                .bodyToMono(Project.class);
     }
 
     public Flux<Project> getAll() {
         return webClient.get()
                 .uri("project")
-                .exchangeToFlux((response) -> {
-                    if (response.statusCode().isError()) {
-                        return response.bodyToFlux(String.class)
-                                .flatMap(errorBody -> Flux.error(new RuntimeException("Error: " + errorBody)));
-                    }
-
-                    return response.bodyToFlux(Project.class);
-                });
+                .retrieve()
+                .bodyToFlux(Project.class);
     }
 
     public Mono<Project> getById(Long id) {
         return webClient.get()
                 .uri("project/{id}", id)
-                .exchangeToMono((response) -> {
-                    if (response.statusCode().isError()) {
-                        return response.bodyToMono(String.class)
-                                .flatMap(errorBody -> Mono.error(new RuntimeException("Error: " + errorBody)));
-
-                    }
-
-                    return response.bodyToMono(Project.class);
-                });
+                .retrieve()
+                .bodyToMono(Project.class);
     }
 
     public Mono<Project> update(Long id, Project updatedProject) {
         return webClient.put()
                 .uri("project", id)
                 .body(Mono.just(updatedProject), Project.class)
-                .exchangeToMono((response) -> {
-                    if (response.statusCode().isError()) {
-                        return response.bodyToMono(String.class)
-                                .flatMap(errorBody -> Mono.error(new RuntimeException("Error: " + errorBody)));
-
-                    }return response.bodyToMono(String.class)
-                            .flatMap(errorBody -> Mono.error(new RuntimeException("Error: " + errorBody)));
-                });
+                .retrieve()
+                .bodyToMono(Project.class);
     }
 
     public Mono<Void> delete(Long id) {
         return webClient.delete()
                 .uri("project/{id}", id)
-                .exchangeToMono((response) -> {
-                    if (response.statusCode().isError()) {
-
-                        return response.bodyToMono(String.class)
-                                .flatMap(errorBody -> Mono.error(new RuntimeException("Error: " + errorBody)));
-                    }
-
-                    return response.bodyToMono(Void.class);
-                });
+                .retrieve()
+                .bodyToMono(Void.class);
     }
 
     public Mono<Project> addUser(Long projectId, Long userId) {
         return webClient.put()
                 .uri("project/{projectId}/add-user/{userId}", projectId, userId)
-                .exchangeToMono((response) -> {
-                    if (response.statusCode().isError()) {
-                        return response.bodyToMono(String.class)
-                                .flatMap(errorBody -> Mono.error(new RuntimeException("Error: " + errorBody)));
-                    }
-
-                    return response.bodyToMono(Project.class);
-                });
+                .retrieve()
+                .bodyToMono(Project.class);
     }
 
     public Mono<Project> removeUser(Long projectId, Long userId) {
         return webClient.put()
                 .uri("project/{projectId}/remove-user/{userId}", projectId, userId)
-                .exchangeToMono((response) -> {
-                    if (response.statusCode().isError()) {
+                .retrieve()
 
-                        return response.bodyToMono(String.class)
-                                .flatMap(errorBody -> Mono.error(new RuntimeException("Error: " + errorBody)));
-                    }
-
-                    return response.bodyToMono(Project.class);
-                });
+                .bodyToMono(Project.class);
     }
 }
+

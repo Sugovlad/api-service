@@ -16,7 +16,7 @@ server:
   port: 8084
 
 application:
-  admin-service-uri: lb://ADMIN-SERVICE
+  admin-service-name: ${ADMIN-SERVICE}
 
 
 

@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 
 @Validated
 @RestController
-@RequestMapping("/api-service/project")
+@RequestMapping("/api/project")
 public class ProjectController {
     private final ProjectService projectService;
 

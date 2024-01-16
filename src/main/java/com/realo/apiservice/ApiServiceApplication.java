@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,15 +20,18 @@ public class ApiServiceApplication {
         SpringApplication.run(ApiServiceApplication.class, args);
     }
 
-    @Value("${application.admin-service-uri}")
-    private String adminServiceURI;
+    @Value("${application.admin-service-name}")
+    private String adminServiceName;
 
     @Bean
+    @LoadBalanced
+    public WebClient.Builder loadBalancedWebClientBuilder() {
+        return WebClient.builder();
+    }
+    @Bean
     public WebClient getWebClient(WebClient.Builder webClientBuilder) {
-        log.info(adminServiceURI);
-
         return webClientBuilder
-                .baseUrl(adminServiceURI + "/admin-service/")
+                .baseUrl("http://" + adminServiceName + "/admin/")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .filter(logRequest())
                 .build();
