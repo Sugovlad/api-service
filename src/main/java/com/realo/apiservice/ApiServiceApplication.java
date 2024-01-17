@@ -37,7 +37,6 @@ public class ApiServiceApplication {
                 .build();
     }
 
-    // This method returns filter function which will log request data
     private static ExchangeFilterFunction logRequest() {
         return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
             log.info("Request: {} {}", clientRequest.method(), clientRequest.url());
