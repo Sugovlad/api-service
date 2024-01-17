@@ -40,7 +40,7 @@ public class ProjectService {
 
     public Mono<Project> update(Long id, Project updatedProject) {
         return webClient.put()
-                .uri("project", id)
+                .uri("project/{id}", id)
                 .body(Mono.just(updatedProject), Project.class)
                 .retrieve()
                 .bodyToMono(Project.class);

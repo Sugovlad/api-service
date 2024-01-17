@@ -31,7 +31,7 @@ public class ApiServiceApplication {
     @Bean
     public WebClient getWebClient(WebClient.Builder webClientBuilder) {
         return webClientBuilder
-                .baseUrl("http://" + adminServiceName + "/admin/")
+                .baseUrl(adminServiceName + "/admin/")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .filter(logRequest())
                 .build();
